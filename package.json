@@ -1,0 +1,22 @@
+{
+  "name": "utility-data-viewer",
+  "version": "1.0.0",
+  "description": "sample front end development wor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NixGD/utility-data-viewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NixGD/utility-data-viewer/issues"
+  },
+  "homepage": "https://github.com/NixGD/utility-data-viewer#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
