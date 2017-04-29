@@ -11,3 +11,5 @@ Online resources used:
 - https://bl.ocks.org/mbostock/3883245
 - - copied some code to build off of
 - http://stackoverflow.com/questions/807878/javascript-that-executes-after-page-load
+- https://bl.ocks.org/d3noob/23e42c8f67210ac6c678db2cd07a747e
+- - copied axis label code

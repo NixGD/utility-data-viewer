@@ -3,7 +3,7 @@
  */
 window.onload = function () {
     var svg = d3.select("svg"),
-        margin = {top: 20, right: 20, bottom: 30, left: 50},
+        margin = {top: 20, right: 20, bottom: 50, left: 100},
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
         g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -28,23 +28,19 @@ window.onload = function () {
             if (error) throw error;
 
             x.domain(d3.extent(data, function(d) { return parseTime(d); }));
-            y.domain(d3.extent(data, function(d) { return d.kwh; }));
+            y.domain([0, d3.max(data, function(d) { return d.kwh; })]);
 
             g.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x))
+                .call(
+                    d3.axisBottom(x)
+                        .ticks(d3.timeMonth.every(1))
+                    )
                 .select(".domain")
                 .remove();
 
             g.append("g")
-                .call(d3.axisLeft(y))
-                .append("text")
-                .attr("fill", "#000")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", "-4em")
-                .attr("text-anchor", "end")
-                .text("Energy (kwh)");
+                .call(d3.axisLeft(y));
 
             g.append("path")
                 .datum(data)
@@ -54,5 +50,24 @@ window.onload = function () {
                 .attr("stroke-linecap", "round")
                 .attr("stroke-width", 1.5)
                 .attr("d", line);
+
+
+            // text label for the x axis
+            svg.append("text")
+                .attr("transform",
+                    "translate(" + (margin.left + width/2) + " ," +
+                    (height + margin.top + 40) + ")")
+                .style("text-anchor", "middle")
+                .text("Month");
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", margin.left/4)
+                .attr("x", 0 - (height / 2) - margin.top)
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("Energy  (kWh)");
+
         });
 };
